@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<!--
+  Simple Portfolio with Profile Picture beside Name
+  - Black background
+  - Navigation bar
+  - Profile picture next to name in the 'Name' section
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jahnavi - Portfolio</title>
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: #000;
+      color: #eee;
+      line-height: 1.5;
+      padding-top: 70px;
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 70px;
+      background: rgba(20, 20, 20, 0.95);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.6);
+      z-index: 1000;
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 12px;
+    }
+
+    .nav-buttons button {
+      background: transparent;
+      border: 1px solid #444;
+      color: #eee;
+      padding: 10px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      font-weight: 600;
+    }
+
+    .nav-buttons button:hover {
+      transform: translateY(-2px);
+      border-color: #888;
+    }
+
+    .nav-buttons button.active {
+      background: #1f6feb;
+      border-color: #1f6feb;
+      color: white;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    h1, h2, h3 { color: #fff; }
+
+    .section { display: none; padding: 18px 0; }
+    .section.active { display: block; }
+
+    .card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.04);
+      padding: 14px;
+      border-radius: 10px;
+      margin-bottom: 12px;
+    }
+
+    .profile {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .profile img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #444;
+    }
+
+    a { color: #9ecbff; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    @media (max-width: 520px) {
+      .nav-buttons button { padding: 8px 10px; font-size: 14px; }
+      .container { padding: 16px; }
+      .profile { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-buttons">
+      <button class="nav-btn active" data-target="name">Name</button>
+      <button class="nav-btn" data-target="education">Education</button>
+      <button class="nav-btn" data-target="projects">Projects</button>
+      <button class="nav-btn" data-target="about">About Me</button>
+      <button class="nav-btn" data-target="contact">Contact</button>
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <section id="name" class="section active">
+      <div class="profile">
+        <img src="C:\Users\vijji\Desktop\My Java Projects\images">
+        <div>
+          <h1>Jahnavi</h1>
+          <p class="card">Aspiring Java Full Stack Developer. Enthusiastic learner who loves building clean and simple web projects.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="education" class="section">
+      <h2>Education</h2>
+      <div class="card">
+        <h3>Bachelor of Science in Computer Science</h3>
+        <p>College Name — Year</p>
+        <p>Relevant subjects, GPA, and achievements.</p>
+      </div>
+      <div class="card">
+        <h3>Certifications</h3>
+        <p>AWS Cloud Practitioner (Year)</p>
+      </div>
+    </section>
+
+    <section id="projects" class="section">
+      <h2>Projects</h2>
+      <div class="card">
+        <h3>Portfolio Website</h3>
+        <p>Simple single-page portfolio built with HTML/CSS and a little JavaScript.</p>
+      </div>
+      <div class="card">
+        <h3>Java Practice App</h3>
+        <p>Console-based programs for data structures and algorithm practice.</p>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <h2>About Me</h2>
+      <p class="card">I enjoy learning Java, web development, and solving coding challenges. Following a consistent study plan and creating small projects helps me grow daily.</p>
+    </section>
+
+    <section id="contact" class="section">
+      <h2>Contact</h2>
+      <div class="card">
+        <p>Email: <a href="mailto:youremail@example.com">youremail@example.com</a></p>
+        <p>LinkedIn: <a href="https://www.linkedin.com" target="_blank">linkedin.com/in/yourprofile</a></p>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    const navButtons = document.querySelectorAll('.nav-btn');
+
+    function handleNavClick(e) {
+      const targetId = e.currentTarget.getAttribute('data-target');
+      navButtons.forEach(btn => btn.classList.remove('active'));
+      e.currentTarget.classList.add('active');
+
+      const sections = document.querySelectorAll('.section');
+      sections.forEach(sec => sec.classList.remove('active'));
+
+      const chosen = document.getElementById(targetId);
+      if (chosen) chosen.classList.add('active');
+    }
+
+    navButtons.forEach(btn => btn.addEventListener('click', handleNavClick));
+
+    window.addEventListener('load', () => {
+      const hash = window.location.hash.replace('#', '');
+      if (hash) {
+        const btn = document.querySelector(`.nav-btn[data-target="${hash}"]`);
+        if (btn) btn.click();
+      }
+    });
+  </script>
+
+</body>
+</html>
